@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+<title>Select Seats</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>🎟 Select Seats</h2>
+
+<!-- SCREEN -->
+<div class="screen">All eyes this way please!</div>
+
+<!-- SEATS -->
+<div class="theatre" id="theatre"></div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="box available"></span> Available
+  <span class="box selected"></span> Selected
+  <span class="box booked"></span> Booked
+</div>
+
+<button class="btn" onclick="goPayment()">Proceed to Pay</button>
+
+<script src="script.js"></script>
+
+<script>
+let theatre = document.getElementById("theatre");
+
+let rows = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // A → Z
+let selectedSeats = [];
+
+// Example booked seats (fake)
+let bookedSeats = ["A3","B5","C7","D2","E8","F4","G6"];
+
+for (let r = 0; r < rows.length; r++) {
+  let rowDiv = document.createElement("div");
+  rowDiv.className = "row";
+
+  let rowLabel = document.createElement("span");
+  rowLabel.className = "row-label";
+  rowLabel.innerText = rows[r];
+
+  rowDiv.appendChild(rowLabel);
+
+  for (let i = 1; i <= 12; i++) {
+
+    let seatNo = rows[r] + i;
+
+    let seat = document.createElement("div");
+    seat.className = "seat";
+    seat.innerText = i;
+
+    // booked seats
+    if (bookedSeats.includes(seatNo)) {
+      seat.classList.add("booked");
+    }
+
+    seat.onclick = function() {
+      if (seat.classList.contains("booked")) return;
+
+      seat.classList.toggle("selected");
+
+      if (selectedSeats.includes(seatNo)) {
+        selectedSeats = selectedSeats.filter(s => s !== seatNo);
+      } else {
+        selectedSeats.push(seatNo);
+      }
+
+      localStorage.setItem("seats", selectedSeats.join(","));
+    };
+
+    rowDiv.appendChild(seat);
+
+    // aisle gap (middle space)
+    if (i == 6) {
+      let gap = document.createElement("div");
+      gap.className = "gap";
+      rowDiv.appendChild(gap);
+    }
+  }
+
+  theatre.appendChild(rowDiv);
+}
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>

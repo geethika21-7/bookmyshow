@@ -1,0 +1,279 @@
+/* RESET */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+}
+
+/* NAVBAR */
+.navbar {
+  background: #d32f2f;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.navbar span {
+  color: black;
+}
+
+/* FORM */
+.form {
+  text-align: center;
+  margin: 20px;
+}
+
+.form input {
+  padding: 10px;
+  margin: 10px;
+  width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* BANNER */
+.banner {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MOVIE SECTION */
+h2 {
+  margin-left: 20px;
+}
+
+/* MOVIE SCROLL */
+.movie-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+/* MOVIE CARD */
+.movie-card {
+  background: white;
+  border-radius: 10px;
+  margin: 10px;
+  min-width: 180px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+/* MOVIE INFO */
+.info {
+  padding: 10px;
+  text-align: center;
+}
+
+.info p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.info span {
+  color: orange;
+  font-weight: bold;
+}
+
+/* BUTTON */
+.btn {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 25px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background: #b71c1c;
+}
+
+/* ========================= */
+/* 🎬 SEATS PAGE STYLING */
+/* ========================= */
+
+/* SCREEN */
+.screen {
+  width: 60%;
+  margin: 20px auto;
+  padding: 15px;
+  background: #ccc;
+  text-align: center;
+  border-radius: 50% / 100px 100px 0 0;
+  font-weight: bold;
+}
+
+/* THEATRE */
+.theatre {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ROW */
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px;
+}
+
+/* ROW LABEL */
+.row-label {
+  width: 20px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* SEATS */
+.seat {
+  width: 28px;
+  height: 28px;
+  margin: 4px;
+  background: #444;
+  color: white;
+  line-height: 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+/* HOVER */
+.seat:hover {
+  background: red;
+}
+
+/* SELECTED */
+.seat.selected {
+  background: #2ecc71;
+}
+
+/* BOOKED */
+.seat.booked {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* GAP (AISLE) */
+.gap {
+  width: 25px;
+}
+
+/* LEGEND */
+.legend {
+  text-align: center;
+  margin: 20px;
+  font-size: 14px;
+}
+
+.box {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.available {
+  background: #444;
+}
+
+.selected {
+  background: #2ecc71;
+}
+
+.booked {
+  background: #999;
+}
+/* PAYMENT PAGE */
+
+.payment-banner img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* MAIN */
+.payment-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px;
+  flex-wrap: wrap;
+}
+
+/* SUMMARY BOX */
+.summary-box {
+  background: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.summary-box h3 {
+  margin-bottom: 10px;
+}
+
+/* PAYMENT BOX */
+.payment-box {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.payment-box h3 {
+  margin-bottom: 15px;
+}
+
+/* OPTIONS */
+.pay-option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pay-option img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.pay-option:hover {
+  background: #f5f5f5;
+}
+
+.pay-option.active {
+  border: 2px solid #d32f2f;
+  background: #ffecec;
+}

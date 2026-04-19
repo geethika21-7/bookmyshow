@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Payment</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+.navbar {
+  background: #d32f2f;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.payment-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px;
+}
+
+.summary-box, .payment-box {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.pay-option {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.pay-option img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.pay-option.active {
+  border: 2px solid red;
+  background: #ffe5e5;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 10px;
+  background: red;
+  color: white;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pay-btn:hover {
+  background: darkred;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">book<span style="color:black;">my</span>show</div>
+
+<div class="payment-container">
+
+  <!-- LEFT -->
+  <div class="summary-box">
+    <h3>Booking Summary</h3>
+    <p><b>Name:</b> <span id="pname"></span></p>
+    <p><b>Movie:</b> <span id="pmovie"></span></p>
+    <p><b>Seats:</b> <span id="pseats"></span></p>
+    <p><b>Total:</b> ₹ <span id="pamount"></span></p>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="payment-box">
+    <h3>Select Payment Method</h3>
+
+    <div class="pay-option" onclick="selectPay(this)">
+      <img src="https://cdn-icons-png.flaticon.com/512/825/825454.png">
+      UPI (GPay / PhonePe)
+    </div>
+
+    <div class="pay-option" onclick="selectPay(this)">
+      <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png">
+      Credit / Debit Card
+    </div>
+
+    <div class="pay-option" onclick="selectPay(this)">
+      <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png">
+      Wallet (Paytm)
+    </div>
+
+    <button class="pay-btn" onclick="payNow()">Pay Now</button>
+  </div>
+
+</div>
+
+<script>
+// =========================
+// LOAD DATA FROM LOCALSTORAGE
+// =========================
+let name = localStorage.getItem("name");
+let movie = localStorage.getItem("movie");
+let seats = localStorage.getItem("seats");
+let email = localStorage.getItem("email");
+
+let count = seats ? seats.split(",").length : 0;
+let amount = count * 150;
+
+// SHOW DATA
+document.getElementById("pname").innerText = name || "-";
+document.getElementById("pmovie").innerText = movie || "-";
+document.getElementById("pseats").innerText = seats || "-";
+document.getElementById("pamount").innerText = amount || 0;
+
+// =========================
+// SELECT PAYMENT
+// =========================
+let selectedMethod = "";
+
+function selectPay(el) {
+  document.querySelectorAll(".pay-option").forEach(p => p.classList.remove("active"));
+  el.classList.add("active");
+  selectedMethod = el.innerText;
+}
+
+// =========================
+// PAY NOW FUNCTION
+// =========================
+
+function payNow() {
+
+  if (!selectedMethod) {
+    alert("❌ Please select payment method");
+    return;
+  }
+
+  // 🔄 Step 1: Show processing
+  let btn = document.querySelector(".pay-btn");
+  btn.innerText = "Processing...";
+  btn.disabled = true;
+
+  // ⏳ Step 2: Fake delay (like real payment)
+  setTimeout(() => {
+
+    // 🔁 Step 3: Call backend AFTER delay
+    fetch("book.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        movie: movie,
+        seats: seats,
+        amount: amount
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      if (data.status === "success") {
+
+        // ✅ Step 4: Show success AFTER payment
+        alert("✅ Payment Successful!");
+
+        // 👉 Redirect
+        window.location.href = "ticket.php?id=" + data.id;
+
+      } else {
+        alert("❌ Payment Failed");
+        btn.innerText = "Pay Now";
+        btn.disabled = false;
+      }
+
+    })
+    .catch(() => {
+      alert("❌ Server Error");
+      btn.innerText = "Pay Now";
+      btn.disabled = false;
+    });
+
+  }, 2000); // 2 seconds delay (like real payment)
+}
+
+</script>
+
+</body>
+</html>
